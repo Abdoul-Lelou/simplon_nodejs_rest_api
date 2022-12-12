@@ -64,6 +64,12 @@ router.post("/login", async (req, res, next) => {
         data: {
           userId: existingUser.id,
           email: existingUser.email,
+          nom: existingUser.nom,
+          prenom: existingUser.prenom,
+          date_inscri: existingUser.date_inscri,
+          roles: existingUser.roles,
+          matricule: existingUser.matricule,
+          img: existingUser.img,
           token: token,
         },
       });
@@ -73,7 +79,7 @@ router.post("/login", async (req, res, next) => {
 router.post('/test',upload.single('img'), async (req, res) => {
     const { email,password,prenom,nom,date_inscri,roles,etat,matricule } = req.body;
     const users = [];
-   console.log(req.body);return
+  
     const newUser = new Model({
 		email,
         password, 
@@ -103,10 +109,10 @@ router.post('/test',upload.single('img'), async (req, res) => {
             res.status(400).json({message: error.message})
         }
 	
-  });
+});
 
 //Post Method
-router.post('/post', check,  async(req, res) => {
+router.post('/post',   async(req, res) => {
 
 const { email, password, prenom, nom, date_inscri, roles, etat, matricule, img } = req.body;
 
@@ -147,7 +153,7 @@ try {
 })
 
 //Get all Method
-router.get('/getAll', async(req, res) => {
+router.get('/getAll',check, async(req, res) => {
     try{        
         const data = await Model.find();
         res.json(data)
@@ -158,13 +164,13 @@ router.get('/getAll', async(req, res) => {
 })
 
 //Get by ID Method
-router.get('/getOne/:id',check, async(req, res) => {
+router.get('/getOne/:id', async(req, res) => {
     const data = await Model.findById(req.params.id);
     res.json(data)
 })
 
 //Update by ID Method
-router.patch('/update/:id',check, async (req, res) => {
+router.patch('/update/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = req.body;

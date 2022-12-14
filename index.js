@@ -11,7 +11,7 @@ const databaseLink = process.env.DATABASE_URL
 
 mongoose.connect(databaseLink,
     { useNewUrlParser: true, useUnifiedTopology: true }, err => {
-        console.log('connected')
+       // console.log('connected')
     });
 const database = mongoose.connection
 
@@ -28,13 +28,13 @@ app.use('/api', routes)
 
 
 database.on('error', (error) => {
-    console.log(error)
+   // console.log(error)
 })
 
 database.once('connected', () => {
-    console.log('Database Connected');
+   // console.log('Database Connected');
 })
 
-app.listen(3000, () => {
-    console.log(`Server Started at ${3000}`)
+app.listen(3001, () => {
+   // console.log(`Server Started at ${3000}`)
 })

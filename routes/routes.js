@@ -52,7 +52,7 @@ router.post("/login", async (req, res, next) => {
         { expiresIn: "1h" }
       );
     } catch (err) {
-      console.log(err);
+     
       const error = new Error("Erreur! Quelque chose s'est mal passée.");
       return next(error);
     }
@@ -74,6 +74,7 @@ router.post("/login", async (req, res, next) => {
         },
       });
 });
+
 
 
 router.post('/test',upload.single('img'), async (req, res) => {
@@ -153,7 +154,7 @@ try {
 })
 
 //Get all Method
-router.get('/getAll',check, async(req, res) => {
+router.get('/getAll', async(req, res) => {
     try{        
         const data = await Model.find();
         res.json(data)

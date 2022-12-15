@@ -9,6 +9,7 @@ verifyToken = (req, res, next) => {
     return res.status(403).send({ message: "Veillez ajouter un token..!" });
   }
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+ // console.log(token);   
     if (err) {
       return res.status(401).send({ message: "Accès non authorisé!" });
     }
@@ -17,6 +18,10 @@ verifyToken = (req, res, next) => {
   });
 };
 
-
+//let payload = jwt.verify(token, process.env.JWT_SECRET);  
+ //console.log(payload); 
+//    if (!payload) {
+  //    return res.status(401).send({ message: "Accès non authorisé!" });
+   // }
 
 module.exports = verifyToken;
